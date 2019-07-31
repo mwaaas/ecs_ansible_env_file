@@ -117,6 +117,15 @@ class Testing(TestCase):
 
             self.assertRaises(AnsibleFailJson, ecs_env_file.main)
 
+    def test_invalid_env_files(self):
+        parameters = deepcopy(self.required_parameters)
+        parameters["env_files"] = ["foo.txt"]  # file that does not exist
+
+        set_module_args(parameters)
+
+        self.assertRaises(AnsibleFailJson, ecs_env_file.main)
+
+
     def test_happy_case(self):
 
         set_module_args(self.required_parameters)

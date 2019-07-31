@@ -1,14 +1,16 @@
 from ansible.module_utils.basic import AnsibleModule
 
 import json
+import os
 
 try:
-    from py_dotenv.dotenv import parse_dotenv
+    from dotenv import dotenv_values
 except ImportError:
-    parse_dotenv = None
+    dotenv_values = None
 
 
 def main():
+
     module = AnsibleModule(
         argument_spec=dict(
             env_files=dict(required=True, type='list'),
@@ -19,7 +21,7 @@ def main():
         supports_check_mode=True,
     )
 
-    if parse_dotenv is None:
+    if dotenv_values is None:
         module.fail_json(msg='parse_dotenv module is not available')
 
     env_file = module.params['env_files']
@@ -31,9 +33,10 @@ def main():
 
     envs = dict()
     for i in env_file:
-        for key, value in parse_dotenv(i):
+        if not os.path.isfile(i):
+            module.fail_json(msg="File {} does not exist".format(i))
+        for key, value in dotenv_values(i).items():
             envs[key] = value
-
     ecs_env = []
     for key, value in envs.items():
         ecs_env.append({"Name": key, "Value": value})
@@ -54,7 +57,7 @@ def main():
         json.dump(data, f, indent=4)
 
     module.exit_json(changed=True,
-                     result=data)
+                     result="done")
 
 
 if __name__ == '__main__':
