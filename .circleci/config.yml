@@ -1,0 +1,39 @@
+version: 2
+defaults: &defaults
+  machine:
+    image: circleci/classic:201708-01
+
+  working_directory: ~/ecs_ansible_env
+
+jobs:
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+
+      - run:
+          name: Running python 2 tests
+          command: make python2_test
+      - run:
+          name: Running python 3 tests
+          command: make python3_tests
+
+  deploy:
+    <<: *defaults
+    steps:
+      - checkout
+
+      - run:
+          name: deploying
+          command: make deploy
+workflows:
+  version: 2
+  ci:
+    jobs:
+      - test
+      - deploy:
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/

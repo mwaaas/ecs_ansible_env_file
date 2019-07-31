@@ -1,7 +1,9 @@
 version: '3.4'
 services:
-  ansible:
-    image: mwaaas/ansible_playbook:latest-latest
+  app:
+    build:
+      context: .
+      args:
+        - PYTHON_VERSION=3.6.7
     volumes:
-      - $HOME/.aws:/root/.aws
       - ./:/usr/src/app
