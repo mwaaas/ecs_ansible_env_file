@@ -2,7 +2,7 @@ test_python3:
 	docker-compose build --build-arg PYTHON_VERSION=3.6.7 app
 	docker-compose run app python -m unittest test_ecs_env.py
 test_python2:
-	docker-compose build --build-arg PYTHON_VERSION=2.7.16 app
+	docker-compose build --build-arg PYTHON_VERSION=2.7 app
 	docker-compose run app python -m unittest test_ecs_env.py
 
 deploy:
