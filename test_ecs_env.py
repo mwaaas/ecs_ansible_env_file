@@ -3,10 +3,15 @@ from ansible.module_utils._text import to_bytes
 import json
 from unittest import TestCase
 from ecs_ansible_env import ecs_env_file
-from unittest import mock
 from shutil import copyfile
 import os
 from copy import deepcopy
+import six
+
+if six.PY3:
+    from unittest import mock
+else:
+    import mock
 
 def set_module_args(args):
     """prepare arguments so that they will be picked up during module creation"""
@@ -100,7 +105,7 @@ class Testing(TestCase):
     def force_delete_file(self, file):
         try:
             os.remove(file)
-        except FileNotFoundError:
+        except Exception:
             pass
 
     def tearDown(self):
