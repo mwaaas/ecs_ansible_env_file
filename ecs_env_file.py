@@ -1,12 +1,11 @@
 from ansible.module_utils.basic import AnsibleModule
-from py_dotenv.dotenv import parse_dotenv
 
 import json
 
 try:
-    import jsonpointer
+    from py_dotenv.dotenv import parse_dotenv
 except ImportError:
-    jsonpointer = None
+    parse_dotenv = None
 
 
 def main():
@@ -20,8 +19,8 @@ def main():
         supports_check_mode=True,
     )
 
-    if jsonpointer is None:
-        module.fail_json(msg='jsonpointer module is not available')
+    if parse_dotenv is None:
+        module.fail_json(msg='parse_dotenv module is not available')
 
     env_file = module.params['env_files']
     cloud_formation_file = module.params['cloud_formation_file']
