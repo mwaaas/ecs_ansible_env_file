@@ -41,7 +41,7 @@ def fail_json(*args, **kwargs):
 @mock.patch.object(basic.AnsibleModule, "fail_json", fail_json)
 class Testing(TestCase):
 
-    def setUp(self) -> None:
+    def setUp(self):
         self.test_file = "./ecs_containers.template.test.json"
 
         # ensure test file does not exist
@@ -103,7 +103,7 @@ class Testing(TestCase):
         except FileNotFoundError:
             pass
 
-    def tearDown(self) -> None:
+    def tearDown(self):
         self.force_delete_file(self.test_file)
 
     def test_missing_parameters(self):
