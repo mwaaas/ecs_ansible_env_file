@@ -1,3 +1,2 @@
+-r install_requires.txt
 ansible==2.8.2
-jsonpointer==2.0
-python-dotenv==0.10.3

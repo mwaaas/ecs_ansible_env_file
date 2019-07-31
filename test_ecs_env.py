@@ -2,7 +2,7 @@ from ansible.module_utils import basic
 from ansible.module_utils._text import to_bytes
 import json
 from unittest import TestCase
-import ecs_env_file
+from ecs_ansible_env import ecs_env_file
 from unittest import mock
 from shutil import copyfile
 import os
