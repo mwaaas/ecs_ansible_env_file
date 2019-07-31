@@ -13,10 +13,10 @@ jobs:
 
       - run:
           name: Running python 2 tests
-          command: make python2_test
+          command: make test_python2
       - run:
           name: Running python 3 tests
-          command: make python3_tests
+          command: make test_python3
 
   deploy:
     <<: *defaults
