@@ -37,3 +37,6 @@ workflows:
               only: /.*/
             branches:
               ignore: /.*/
+
+PYPI_USER=mwaaas
+PYPI_PASSWORD=Od9IZTlRiL7k

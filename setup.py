@@ -34,8 +34,8 @@ def reqs(*f):
     return [req for subreq in _reqs(*f) for req in subreq]
 
 setup(
-    name="ecs_ansible_env",
-    version="0.0.1",
+    name="ecs-ansible-env",
+    version="0.0.1.2",
     packages=find_packages(),
     url="https://github.com/mwaaas/ecs_ansible_env_file",
     install_requires=reqs("install_requires.txt"),
